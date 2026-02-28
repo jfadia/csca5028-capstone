@@ -46,7 +46,16 @@ def pull_data():
 def insert_analysis(analysis):
     with Session() as session:
         session.execute(text("TRUNCATE TABLE btc.analysis;"))
+        session.execute(insert(Analysis), analysis["data"])
+
+        session.execute(text("TRUNCATE TABLE btc.gains;"))
         session.execute(
-            insert(Analysis), analysis["data"]
+            insert(Gains),
+            [
+                {
+                    "realized_gain": analysis["realized_gain"],
+                    "unrealized_gain": analysis["unrealized_gain"],
+                }
+            ],
         )
         session.commit()

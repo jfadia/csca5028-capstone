@@ -73,19 +73,16 @@ def get_buy_and_sell_signals(data: List[Prices]):
             unrealized_gain = d.price - last_bought_price
 
     return {
-        "actions": actions,
         "realized_gain": realized_gain,
         "unrealized_gain": unrealized_gain,
-        "date": [d.date for d in data],
-        "price": [d.price for d in data],
         "data": [
             {
                 "signal": actions[i],
-                "date": data[i+29].date,
-                "price": data[i+29].price
+                "date": data[i + 29].date,
+                "price": data[i + 29].price,
             }
             for i in range(len(actions))
-        ]
+        ],
     }
 
 
