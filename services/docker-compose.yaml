@@ -6,7 +6,23 @@ services:
     volumes:
       - .:/data-collector/src:cached
       - /src/.venv
-    command: sleep infinity
+    ports:
+      - "8000:8000"
+    environment:
+      DB_USER: postgres
+      DB_PASSWORD: password
+      DB_NAME: mydb
+      DB_HOST: db
+
+  data-analyzer:
+    build:
+      context: ./data-analyzer
+      dockerfile: Dockerfile
+    volumes:
+      - .:/data-analyzer/src:cached
+      - /src/.venv
+    ports:
+      - "80:80"
     environment:
       DB_USER: postgres
       DB_PASSWORD: password
