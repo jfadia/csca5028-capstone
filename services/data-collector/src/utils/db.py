@@ -29,5 +29,5 @@ def insert_prices(data):
 
 def truncate_prices():
     with Session() as session:
-        session.execute(text("TRUNCATE TABLE btc.prices"))
+        session.execute(text("TRUNCATE TABLE btc.prices;"))
         session.commit()

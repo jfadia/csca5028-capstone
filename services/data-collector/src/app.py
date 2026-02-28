@@ -1,4 +1,5 @@
 from datetime import datetime
+import uvicorn
 
 from fastapi import FastAPI, Query
 from models.collect_data import CollectData
@@ -37,3 +38,6 @@ async def collect_data(params: Annotated[CollectData, Query()]):
     ]
     truncate_prices()
     insert_prices(data)
+
+if __name__ == "__main__":
+    uvicorn.run("app:app", host="0.0.0.0", port=8000)
