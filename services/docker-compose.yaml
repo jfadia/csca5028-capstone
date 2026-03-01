@@ -13,6 +13,7 @@ services:
       DB_PASSWORD: password
       DB_NAME: mydb
       DB_HOST: db
+      PROMETHEUS_HOST: prometheus
 
   data-analyzer:
     build:
@@ -28,6 +29,7 @@ services:
       DB_PASSWORD: password
       DB_NAME: mydb
       DB_HOST: db
+      PROMETHEUS_HOST: prometheus
 
   streamlit:
     build:
@@ -58,6 +60,13 @@ services:
       - ./flyway:/flyway/sql
     depends_on:
       - db
+
+  prometheus:
+    image: prom/prometheus:v3
+    volumes:
+      - ./prometheus/prometheus.yaml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
 
 volumes:
   postgres-data:

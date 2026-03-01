@@ -1,11 +1,15 @@
 import uvicorn
 
+from prometheus_fastapi_instrumentator import Instrumentator
 from fastapi import FastAPI
 from typing import List
 from utils.db import pull_data, Prices, insert_analysis
 from utils.fixtures import Action, MAState
 
 app = FastAPI()
+
+# prometheus integration
+Instrumentator().instrument(app).expose(app)
 
 
 def get_buy_and_sell_signals(data: List[Prices]):

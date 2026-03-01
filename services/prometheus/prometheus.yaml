@@ -1,0 +1,10 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: "data-collector"
+    static_configs:
+      - targets: ["data-collector:8000"]
+  - job_name: "data-analyzer"
+    static_configs:
+      - targets: ["data-analyzer:80"]
