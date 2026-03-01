@@ -13,7 +13,6 @@ services:
       DB_PASSWORD: password
       DB_NAME: mydb
       DB_HOST: db
-      PROMETHEUS_HOST: prometheus
 
   data-analyzer:
     build:
@@ -29,7 +28,6 @@ services:
       DB_PASSWORD: password
       DB_NAME: mydb
       DB_HOST: db
-      PROMETHEUS_HOST: prometheus
 
   streamlit:
     build:
