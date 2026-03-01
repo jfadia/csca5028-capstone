@@ -59,5 +59,12 @@ services:
     depends_on:
       - db
 
+  prometheus:
+    image: prom/prometheus:v3
+    volumes:
+      - ./prometheus/prometheus.yaml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+
 volumes:
   postgres-data:
