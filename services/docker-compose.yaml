@@ -38,7 +38,13 @@ services:
     volumes:
       - .:/streamlit/src:cached
       - /src/.venv
-    command: "uv run python -m streamlit run app.py --server.port=8501 --server.address=0.0.0.0"
+    environment:
+      DB_USER: postgres
+      DB_PASSWORD: password
+      DB_NAME: mydb
+      DB_HOST: db
+      DATA_COLLECTOR_ENDPOINT: http://data-collector:8000/data
+      DATA_ANALYZER_ENDPOINT: http://data-analyzer:80/analyze
   
   db:
     image: postgres:15
