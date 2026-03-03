@@ -1,5 +1,7 @@
 import uvicorn
 
+import pika
+import os
 from prometheus_fastapi_instrumentator import Instrumentator
 from fastapi import FastAPI
 from typing import List
@@ -10,6 +12,9 @@ app = FastAPI()
 
 # prometheus integration
 Instrumentator().instrument(app).expose(app)
+
+RABBITMQ_HOST = os.environ["RABBITMQ_HOST"]
+RABBITMQ_QUEUE = os.environ["RABBITMQ_QUEUE"]
 
 
 def get_buy_and_sell_signals(data: List[Prices]):
@@ -90,17 +95,19 @@ def get_buy_and_sell_signals(data: List[Prices]):
     }
 
 
-@app.get("/health")
-async def health_check():
-    return {"status": "ok"}
-
-
-@app.get("/analyze")
-async def analyze():
+def analyze(*args, **kwargs):
     data = pull_data()
     analysis = get_buy_and_sell_signals(data)
     insert_analysis(analysis)
 
 
 if __name__ == "__main__":
-    uvicorn.run("app:app", host="0.0.0.0", port=80)
+    with pika.BlockingConnection(pika.ConnectionParameters(host=RABBITMQ_HOST)) as connection:
+        channel = connection.channel()
+        channel.queue_declare(queue=RABBITMQ_QUEUE)
+        channel.basic_consume(
+            queue=RABBITMQ_QUEUE,
+            auto_ack=True,
+            on_message_callback=analyze
+        )
+        channel.start_consuming()
