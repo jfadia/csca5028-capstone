@@ -6,6 +6,9 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
+      - run:
+          name: "Docker compose"
+          command: cd services && docker compose up -d
 
 workflows:
   build-and-test:
