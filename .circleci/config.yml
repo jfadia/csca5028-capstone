@@ -19,7 +19,7 @@ jobs:
       - run:
           working_directory: ~/project/services
           name: "Query db"
-          command: docker compose exec postgres psql -U postgres -d mydb -c "select * from analysis"
+          command: docker compose exec db psql -U postgres -d mydb -c "select * from analysis"
       - run:
           working_directory: ~/project/services
           command: docker compose logs data-analyzer
