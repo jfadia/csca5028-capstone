@@ -10,4 +10,4 @@ class Action(StrEnum):
 class MAState(StrEnum):
     SURPLUS = "SURPLUS"
     DEFICIT = "DEFICIT"
-    NONE = "NONE"
+    BREAKEVEN = "BREAKEVEN"

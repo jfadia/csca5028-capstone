@@ -1,6 +1,5 @@
 from sqlalchemy import create_engine, Column, select, Date
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, declarative_base
 from sqlalchemy import text, insert
 
 import os
