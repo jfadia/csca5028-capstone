@@ -7,10 +7,11 @@ jobs:
       - checkout
       - setup_remote_docker
       - run:
-          working_directory: ~/services
+          working_directory: ~/project/services
           name: Get pwd
           command: pwd
       - run:
+          working_directory: ~/project/services
           name: Ls
           command: ls
       # - run:
