@@ -98,9 +98,9 @@ services:
         condition: service_healthy
 
   prometheus:
-    image: prom/prometheus:v3
-    volumes:
-      - ./prometheus/prometheus.yaml:/etc/prometheus/prometheus.yml
+    build:
+      context: ./prometheus
+      dockerfile: Dockerfile
     ports:
       - "9090:9090"
     depends_on:
