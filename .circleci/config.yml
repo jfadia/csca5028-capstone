@@ -3,15 +3,14 @@ jobs:
   build-and-test:
     docker:
       - image: cimg/base:2026.03
+    working_directory: ~/project/services
     steps:
       - checkout
       - setup_remote_docker
       - run:
-          working_directory: ~/project/services
           name: Get pwd
           command: pwd
       - run:
-          working_directory: ~/project/services
           name: Ls
           command: ls
       - run:
