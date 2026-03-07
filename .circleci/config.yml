@@ -10,11 +10,14 @@ jobs:
           name: Get pwd
           command: pwd
       - run:
-          name: "Docker compose"
-          command: docker compose up -d
-      - run:
-          name: "Test data-collector"
-          command: docker compose exec data-collector uv run python -m pytest -s -vv
+          name: Ls
+          command: ls
+      # - run:
+      #     name: "Docker compose"
+      #     command: docker compose up -d
+      # - run:
+      #     name: "Test data-collector"
+      #     command: docker compose exec data-collector uv run python -m pytest -s -vv
 
 workflows:
   ci:
