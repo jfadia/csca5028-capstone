@@ -1,0 +1,27 @@
+version: 2.1
+jobs:
+  build-and-test:
+    docker:
+      - image: cimg/base:2026.03
+    resource_class: small
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          working_directory: ~/project/services
+          name: "Docker compose"
+          command: docker compose up -d
+      - run: docker ps -a
+      - run:
+          working_directory: ~/project/services
+          name: "Test data-collector"
+          command: docker compose exec -e RABBITMQ_QUEUE='test-queue-data-collector' data-collector uv run python -m pytest -s -vv
+      - run:
+          working_directory: ~/project/services
+          name: "Test data-analyzer"
+          command: docker compose exec -e RABBITMQ_QUEUE='test-queue-data-analyzer' data-analyzer uv run python -m pytest -s -vv
+
+workflows:
+  ci:
+    jobs:
+      - build-and-test
