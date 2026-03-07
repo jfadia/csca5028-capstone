@@ -2,7 +2,12 @@ version: 2.1
 jobs:
   build:
     machine:
-      image: ubuntu-2404:2026.02.2
+      image: ubuntu-2204:edge
     resource_class: small
     steps:
       - checkout
+
+workflows:
+  build-and-test:
+    jobs:
+      - build
