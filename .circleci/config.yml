@@ -3,7 +3,7 @@ jobs:
   build-and-test:
     docker:
       - image: cimg/base:2026.03
-    working_directory: /home/circleci/project/services
+    working_directory: ~/services
     steps:
       - checkout
       - setup_remote_docker
