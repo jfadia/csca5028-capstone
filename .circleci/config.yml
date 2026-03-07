@@ -3,12 +3,13 @@ jobs:
   build-and-test:
     docker:
       - image: cimg/base:2026.03
+    working_directory: services
     steps:
       - checkout
       - setup_remote_docker
       - run:
           name: "Docker compose"
-          command: cd services && docker compose up -d
+          command: docker compose up -d
       - run:
           name: "Test data-collector"
           command: docker compose exec data-collector uv run python -m pytest -s -vv
