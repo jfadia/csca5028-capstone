@@ -3,6 +3,7 @@ jobs:
   build-and-test:
     docker:
       - image: cimg/base:2026.03
+    resource_class: small
     steps:
       - checkout
       - setup_remote_docker
@@ -22,6 +23,10 @@ jobs:
           working_directory: ~/project/services
           name: "Test data-collector"
           command: docker compose exec data-collector uv run python -m pytest -s -vv
+      - run:
+          working_directory: ~/project/services
+          name: "Test data-analyzer"
+          command: docker compose exec data-analyzer uv run python -m pytest -s -vv
 
 workflows:
   ci:
