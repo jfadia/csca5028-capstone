@@ -18,9 +18,6 @@ jobs:
           command: docker compose exec -e RABBITMQ_QUEUE='test-queue-data-collector' data-collector uv run python -m pytest -s -vv
       - run:
           working_directory: ~/project/services
-          command: docker compose logs data-analyzer
-      - run:
-          working_directory: ~/project/services
           name: "Test data-analyzer"
           command: docker compose exec -e RABBITMQ_QUEUE='test-queue-data-analyzer' data-analyzer uv run python -m pytest -s -vv
 
