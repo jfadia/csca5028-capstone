@@ -32,7 +32,7 @@ def main():
         default_date_max = analysis["date"].max()
 
     st.title("Bitcoin Price Analysis")
-    st.write(f"This app visualizes Bitcoin price data along with buy/sell signals.")
+    st.write(f"This app visualizes Bitcoin price data along with buy/sell signals. Buy signals are generated when the 7-day moving average exceeds the 30-day moving average. Sell signals are generated when the 30-day moving average exceeds the 7-day moving average.")
 
     st.date_input(
         "Use the selector below to adjust the date range:",
