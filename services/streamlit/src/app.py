@@ -22,6 +22,8 @@ def _refresh_data():
 
 
 def main():
+    st.set_page_config(page_title="Historical BTC Analysis")
+
     analysis, gains = pull_data()
 
     if analysis.empty:
