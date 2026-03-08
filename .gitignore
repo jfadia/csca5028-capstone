@@ -4,3 +4,4 @@ __pycache__/
 queries.active
 services/wal
 .DS_Store
+.env
