@@ -8,7 +8,7 @@ jobs:
       - checkout
       - setup_remote_docker
       - run:
-          working_directory: ~/projects/services/flyway
+          working_directory: ~/project/services/flyway
           name: "Build flyway container"
           command: docker build -t flyway:run-migration-scripts .
       # - run:
