@@ -13,7 +13,7 @@ jobs:
           command: docker build -t flyway:run-migration-scripts .
       - run:
           name: "Execute migration"
-          command: docker run flyway:run-migration-scripts -url=jdbc:postgresql://${DB_HOST}:5432/${DB_NAME} -schema=public -user=${DB_USER} -password=${DB_PASSWORD} migrate
+          command: docker run flyway:run-migration-scripts -url=jdbc:postgresql://${DB_HOST}:5432/${DB_NAME} -schemas=public -user=${DB_USER} -password=${DB_PASSWORD} migrate
 
 workflows:
   db-migration:
